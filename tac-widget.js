@@ -76,6 +76,7 @@ function main() {
         
         sockets_script.prependTo("head");
         
+        /*
         var ab_test_script= $("<script>", {
             type: "text/javascript",
             async: true,
@@ -83,130 +84,132 @@ function main() {
         });
         
         ab_test_script.appendTo("head");
-        
+        */
         
 
         
         if(stored.indexOf("product")>0) {
             
-            var session = new sixpack.Session();
-            session.participate("test-exp", ["alt-one", "alt-two"], function (err, res) {
-              if (err) throw err;
-              var alt = res.alternative.name
-              if (alt == 'alt-one') {
-                console.log('no-widg: ' + alt);
-                  var no_widg_script= $("<script>", {
-                      type: "text/javascript",
-                      async: true,
-                      src: "https://cdn.rawgit.com/dish615/devAbTest1/master/no-widg.js"
-                  });
-                  
-                  no_widg_script.appendTo("head");
-                  
-                  
-              } else {
-                console.log('with widg '+alt);
-              
+            $.getScript(web+"/sixpack.js", function(){
             
-                var css_link = $("<link>", { 
-                    rel: "stylesheet", 
-                    type: "text/css", 
-                    href: "https://cdn.rawgit.com/dish615/devAbTest1/master/style.css" 
+                var session = new sixpack.Session();
+                session.participate("test-exp", ["alt-one", "alt-two"], function (err, res) {
+                  if (err) throw err;
+                  var alt = res.alternative.name
+                  if (alt == 'alt-one') {
+                    console.log('no-widg: ' + alt);
+                      var no_widg_script= $("<script>", {
+                          type: "text/javascript",
+                          async: true,
+                          src: "https://cdn.rawgit.com/dish615/devAbTest2/master/no-widg.js"
+                      });
 
-                });
-
-                css_link.appendTo("head");
-
-                var google_fonts= $("<link>",{
-                    rel: "stylesheet",
-                    type: 'text/css',
-                    href: "https://fonts.googleapis.com/css?family=Raleway:400,500"
-                });
-
-                google_fonts.appendTo("head");
+                      no_widg_script.appendTo("head");
 
 
-
-               var widg_script = $("<script>", {
-                   type: "text/javascript",
-                    async: true,
-                    src: "https://cdn.rawgit.com/dish615/devAbTest1/master/check.js"
-                });
-
-                widg_script.appendTo("head");
+                  } else {
+                    console.log('with widg '+alt);
 
 
+                    var css_link = $("<link>", { 
+                        rel: "stylesheet", 
+                        type: "text/css", 
+                        href: "https://cdn.rawgit.com/dish615/devAbTest2/master/style.css" 
+
+                    });
+
+                    css_link.appendTo("head");
+
+                    var google_fonts= $("<link>",{
+                        rel: "stylesheet",
+                        type: 'text/css',
+                        href: "https://fonts.googleapis.com/css?family=Raleway:400,500"
+                    });
+
+                    google_fonts.appendTo("head");
 
 
-                var jsonp_url= "https://cdn.rawgit.com/dish615/devAbTest1/master/index.html";
-                $.get(jsonp_url, function(data){
-                    console.log(data);
-                    console.log(typeof data);
-                    //might need to add a container surrounding add to cart button and tb widget to set width  $("input[type='submit'][name='add']").before("<div id='cartAndTb'>");
 
-                        //needCont
-                    //s3.amazonaws.com/shopify-apps/pre-order/js/jquery.spur.cart.api.js
+                   var widg_script = $("<script>", {
+                       type: "text/javascript",
+                        async: true,
+                        src: "https://cdn.rawgit.com/dish615/devAbTest2/master/check.js"
+                    });
 
-                    if($("script[src*='s3.amazonaws.com/shopify-apps/pre-order/js/jquery.spur.cart.api.js']").length>0 && $(".tooltipstered").is(":visible")) {
-                        $(".tooltipstered").first().after(data);
-                        $(".tooltipstered").first().addClass("needCont");
-                        $(".needCont").wrapAll("<div id='cartAndTb'></div>");
-                        btn=  $(".tooltipstered").first().outerWidth();
+                    widg_script.appendTo("head");
 
-                    } else if($("input[type='submit'][name='add']").length>0) {
-                       // var cartVerif= $("input[type='submit'][name='add']").text().toLowerCase();
-                        //console.log(cartVerif);
-                        //if(cartVerif.indexOf("cart")>0) {
 
-                           $("input[type='submit'][name='add']").first().after(data);
-                            $("input[type='submit'][name='add']").first().addClass("needCont");
-                            $("input[type='submit'][name='add']").first().addClass("tb-width-important");
-                           $(".needCont").wrapAll("<div id='cartAndTb'></div>");
-                            btn= $("input[type='submit'][name='add']").first().outerWidth();
-                       //  }
 
-                    } else if($("button[type='submit'][name='add']").length>0) {
-                       // var cartVerif= $("button[type='submit'][name='add']").text().toLowerCase();
-                       // console.log(cartVerif);
-                       // if(cartVerif.indexOf("cart")>0) {
-                           $("button[type='submit'][name='add']").first().after(data);
-                            $("button[type='submit'][name='add']").first().addClass("needCont");
-                            $("button[type='submit'][name='add']").first().addClass("tb-width-important");
+
+                    var jsonp_url= "https://cdn.rawgit.com/dish615/devAbTest2/master/index.html";
+                    $.get(jsonp_url, function(data){
+                        console.log(data);
+                        console.log(typeof data);
+                        //might need to add a container surrounding add to cart button and tb widget to set width  $("input[type='submit'][name='add']").before("<div id='cartAndTb'>");
+
+                            //needCont
+                        //s3.amazonaws.com/shopify-apps/pre-order/js/jquery.spur.cart.api.js
+
+                        if($("script[src*='s3.amazonaws.com/shopify-apps/pre-order/js/jquery.spur.cart.api.js']").length>0 && $(".tooltipstered").is(":visible")) {
+                            $(".tooltipstered").first().after(data);
+                            $(".tooltipstered").first().addClass("needCont");
                             $(".needCont").wrapAll("<div id='cartAndTb'></div>");
-                            btn= $("button[type='submit'][name='add']").first().outerWidth();
-                       // }
+                            btn=  $(".tooltipstered").first().outerWidth();
 
-                    } else if($("script:contains('\"name\":\"Canopy\"')").length>0) {
-                        $("button[name='add']").first().after(data);
-                        $("button[name='add']").first().addClass("needCont");
-                        $("button[name='add']").first().addClass("tb-width-important");
-                        $(".needCont").wrapAll("<div id='cartAndTb'></div>");
-                        btn= $("button[name='add']").first().outerWidth();
+                        } else if($("input[type='submit'][name='add']").length>0) {
+                           // var cartVerif= $("input[type='submit'][name='add']").text().toLowerCase();
+                            //console.log(cartVerif);
+                            //if(cartVerif.indexOf("cart")>0) {
 
-                    }
+                               $("input[type='submit'][name='add']").first().after(data);
+                                $("input[type='submit'][name='add']").first().addClass("needCont");
+                                $("input[type='submit'][name='add']").first().addClass("tb-width-important");
+                               $(".needCont").wrapAll("<div id='cartAndTb'></div>");
+                                btn= $("input[type='submit'][name='add']").first().outerWidth();
+                           //  }
 
-                   // console.log($("#plzwork"));
-                    var content= {
-                        url: stored,
-                        btnWidth: btn
-                    };
+                        } else if($("button[type='submit'][name='add']").length>0) {
+                           // var cartVerif= $("button[type='submit'][name='add']").text().toLowerCase();
+                           // console.log(cartVerif);
+                           // if(cartVerif.indexOf("cart")>0) {
+                               $("button[type='submit'][name='add']").first().after(data);
+                                $("button[type='submit'][name='add']").first().addClass("needCont");
+                                $("button[type='submit'][name='add']").first().addClass("tb-width-important");
+                                $(".needCont").wrapAll("<div id='cartAndTb'></div>");
+                                btn= $("button[type='submit'][name='add']").first().outerWidth();
+                           // }
 
-                    console.log(content);
+                        } else if($("script:contains('\"name\":\"Canopy\"')").length>0) {
+                            $("button[name='add']").first().after(data);
+                            $("button[name='add']").first().addClass("needCont");
+                            $("button[name='add']").first().addClass("tb-width-important");
+                            $(".needCont").wrapAll("<div id='cartAndTb'></div>");
+                            btn= $("button[name='add']").first().outerWidth();
 
-                    document.getElementById("plzwork").onload = function() {
-                        document.getElementById("plzwork").contentWindow.postMessage(content, web);  
-                        console.log(window.location.href.indexOf("sculpturemart"));
-                         if(window.location.href.indexOf("sculpturemart")>0) {
-                                 console.log("triggered");
-                                 $("#plzwork").css("height", "53.5px");
-                          }
-                    };
+                        }
 
+                       // console.log($("#plzwork"));
+                        var content= {
+                            url: stored,
+                            btnWidth: btn
+                        };
+
+                        console.log(content);
+
+                        document.getElementById("plzwork").onload = function() {
+                            document.getElementById("plzwork").contentWindow.postMessage(content, web);  
+                            console.log(window.location.href.indexOf("sculpturemart"));
+                             if(window.location.href.indexOf("sculpturemart")>0) {
+                                     console.log("triggered");
+                                     $("#plzwork").css("height", "53.5px");
+                              }
+                        };
+
+                    });
+
+                }
                 });
-
-            }
-            });
-        
+        });
         
     }
 

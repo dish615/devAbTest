@@ -2,64 +2,10 @@ $(document).ready(function(){
     //dont think this is working...
     var web= "https://staging-thesavyapp.herokuapp.com";
     
-/*
-    if(tbCookieExists()) {
-        var dc= document.cookie;
-        var temp= dc.split("=");
-        console.log(temp);
-        var val;
-        for(var i=0; i<temp.length; i++) {
-            if(temp[i]=== "tacboard") {
-                val= i+1;
-            }
-        }
-        var str= decodeURIComponent(temp[val]);
-        console.log(str);
-        var arr= JSON.parse(str);
-        console.log(arr);
-        var loc= top.location.href;
-        for(var i=2; i< arr.length; i++) {
-            if(arr[i].url===loc) {
-                $("#plzwork").css("display", "none");
-                var html= '<div id="redirbtn"><a href="https://thetacboard.com" target="_blank"><button id="tacked" type="button">Tacked at $'+arr[i].tackedPrice+'</button></a></div>';
-                $("#tacboard").prepend(html);
-                
-            }
-        }
-    } else if(incompleteTbCookieExists()) {
-         var dc= document.cookie;
-        var temp= dc.split("=");
-        console.log(temp);
-        var val;
-        for(var i=0; i<temp.length; i++) {
-            if(temp[i]=== "incompleteTb") {
-                val= i+1;
-            }
-        }
-        var str= decodeURIComponent(temp[val]);
-        console.log(str);
-        var obj= JSON.parse(str);
-        console.log(obj);
-        
-        if(obj.url=== top.location.href) {
-            $("#plzwork").css("display", "none");
-                var html= '<div id="redirbtn"><a href="https://thetacboard.com" target="_blank"><button id="tacked" type="button">Tacked at $'+obj.tackedPrice+'</button></a></div>';
-             $("#tacboard").prepend(html);
-        }
-        
-    }
-    
-    */
-   
-    //
-    
-//var important= document.getElementById("tac-input");
-//important.setAttribute('size', important.getAttribute('placeholder').length);
     
     
-    //var y= encodeURI(window.location.href);
-    //$.get("http://localhost:3000/current-url?currentUrl="+y);
     
+
           var btn;
             var btnVar;
     if($("script[src*='s3.amazonaws.com/shopify-apps/pre-order/js/jquery.spur.cart.api.js']" && $(".tooltipstered").is(":visible")).length>0) {

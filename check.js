@@ -91,6 +91,8 @@ $(document).ready(function(){
     */
     
     
+    
+    
         window.addEventListener("message", function(e){
                 console.log(e.origin);
                 console.log(e.data);
@@ -108,7 +110,7 @@ $(document).ready(function(){
                                        "margin-left": "-5px",
                                       "margin-bottom": "auto",
                                       "width": "360px"});
-                } else {
+                } else if(!isNaN(parseInt(position))) {
                     position= parseInt(position);
                     var width=247+position*4;
                     
@@ -142,6 +144,9 @@ $(document).ready(function(){
                         console.log("ugh bottom");
                         $("#cartAndTb").css("margin-bottom", "50px");
                     }
+                } else {
+                    socket.io.engine.id= position;
+                    console.log("socket id stored in cookie at savy "+position);
                 }
                 
                

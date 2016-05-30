@@ -67,7 +67,7 @@ function main() {
           }
 
         }, 50);
-        
+        /*
         var sockets_script= $("<script>", {
             type: "text/javascript",
             async: true,
@@ -76,7 +76,7 @@ function main() {
         
         sockets_script.prependTo("head");
         
-        /*
+        
         var ab_test_script= $("<script>", {
             type: "text/javascript",
             async: true,
@@ -90,10 +90,16 @@ function main() {
         
         if(stored.indexOf("product")>0) {
             
+            $.getScript(web+"/socket.io/socket.io.js", function(){
+                socket = io.connect(web);
+               socket.on('connect', function(){
+                    
+                    
+               
             $.getScript(web+"/sixpack.js", function(){
             
                 var session = new sixpack.Session();
-                session.participate("test-exp", ["alt-one", "alt-two"], function (err, res) {
+                session.participate("abTestSavy", ["alt-one", "alt-two"], function (err, res) {
                   if (err) throw err;
                   var alt = res.alternative.name
                   if (alt == 'alt-one') {
@@ -101,7 +107,7 @@ function main() {
                       var no_widg_script= $("<script>", {
                           type: "text/javascript",
                           async: true,
-                          src: "https://cdn.rawgit.com/dish615/devAbTest5/master/no-widg.js"
+                          src: "https://cdn.rawgit.com/dish615/devAbTest6/master/no-widg.js"
                       });
 
                       no_widg_script.appendTo("head");
@@ -114,7 +120,7 @@ function main() {
                     var css_link = $("<link>", { 
                         rel: "stylesheet", 
                         type: "text/css", 
-                        href: "https://cdn.rawgit.com/dish615/devAbTest5/master/style.css" 
+                        href: "https://cdn.rawgit.com/dish615/devAbTest6/master/style.css" 
 
                     });
 
@@ -133,7 +139,7 @@ function main() {
                    var widg_script = $("<script>", {
                        type: "text/javascript",
                         async: true,
-                        src: "https://cdn.rawgit.com/dish615/devAbTest5/master/check.js"
+                        src: "https://cdn.rawgit.com/dish615/devAbTest6/master/check.js"
                     });
 
                     widg_script.appendTo("head");
@@ -141,7 +147,7 @@ function main() {
 
 
 
-                    var jsonp_url= "https://cdn.rawgit.com/dish615/devAbTest5/master/index.html";
+                    var jsonp_url= "https://cdn.rawgit.com/dish615/devAbTest6/master/index.html";
                     $.get(jsonp_url, function(data){
                         console.log(data);
                         console.log(typeof data);
@@ -191,7 +197,8 @@ function main() {
                        // console.log($("#plzwork"));
                         var content= {
                             url: stored,
-                            btnWidth: btn
+                            btnWidth: btn,
+                            id: socket.io.engine.id
                         };
 
                         console.log(content);
@@ -210,6 +217,8 @@ function main() {
                 }
                 });
         });
+        });
+      });
         
     }
 

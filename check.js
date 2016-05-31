@@ -145,7 +145,8 @@ $(document).ready(function(){
                         $("#cartAndTb").css("margin-bottom", "50px");
                     }
                 } else {
-                    socket.io.engine.id= position;
+                    //socket.io.engine.id= position;
+                    socket.emit('store-userid', position);
                     console.log("socket id stored in cookie at savy "+position);
                 }
                 

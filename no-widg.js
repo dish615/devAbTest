@@ -28,7 +28,7 @@ $(document).ready(function(){
                 sessionId: socket.io.engine.id,
                 element: this
             };
-            console.log(JSON.stringify(clickData);
+            console.log(JSON.stringify(clickData));
 
             socket.emit('ab-click', clickData);
         });

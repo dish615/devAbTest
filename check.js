@@ -1,17 +1,18 @@
 $(document).ready(function(){
     //dont think this is working...
     var web= "https://staging-thesavyapp.herokuapp.com";
-    
-    console.log(socket);
+    var userId;
+    var url= window.location.href;
+    //console.log(socket);
   
     
     
 
             var btn;
-            var btnVar;
+           // var btnVar;
     if($("script[src*='s3.amazonaws.com/shopify-apps/pre-order/js/jquery.spur.cart.api.js']" && $(".tooltipstered").is(":visible")).length>0) {
             btn= $(".tooltipstered").first().outerWidth();
-            btnVar= $(".tooltipstered").first();
+           // btnVar= $(".tooltipstered").first();
             if($(".satcb_btn input").length<=0 || $("div.purchase.clearfix").length<=0) {
                 $(".tooltipstered").first().css({"width": btn+"px",
                                                         "display": "inline-block"});
@@ -25,7 +26,7 @@ $(document).ready(function(){
            // if(cartVerif.indexOf("cart")>0) {
           
           btn= $("input[type='submit'][name='add']").first().outerWidth();
-          btnVar= $("input[type='submit'][name='add']").first();
+         // btnVar= $("input[type='submit'][name='add']").first();
           if($(".satcb_btn input").length<=0 || $("div.purchase.clearfix").length<=0) {
             $("input[type='submit'][name='add']").first().css({"width": btn+"px",
                                                     "display": "inline-block"});
@@ -41,7 +42,7 @@ $(document).ready(function(){
       //  if(cartVerif.indexOf("cart")>0) {
           
          btn= $("button[type='submit'][name='add']").first().outerWidth();
-          btnVar= $("button[type='submit'][name='add']").first();
+         // btnVar= $("button[type='submit'][name='add']").first();
           if($(".satcb_btn button").length<=0 || $("div.purchase.clearfix").length<=0) {
                   $("button[type='submit'][name='add']").first().css({"width": btn+"px",
                                                     "display": "inline-block"});
@@ -52,15 +53,15 @@ $(document).ready(function(){
       } else if($("script:contains('\"name\":\"Canopy\"')").length>0) {
                
           btn= $("button[name='add']").first().outerWidth();
-          btnVar= $("button[name='add']").first();
+         // btnVar= $("button[name='add']").first();
            $("button[name='add']").first().css({"width": btn+"px",
                                                     "display": "inline-block"});
                 
       }
-    console.log(btn);
+    //console.log(btn);
     
     //$.get(web+"/cartButton?width="+btn); REVERT TO THIS 622ae3df385a7cd5b1755e9715c95db5617d3ad7
-    
+    /*
     btnVar.click(function(){
         
         var dat= {
@@ -69,17 +70,14 @@ $(document).ready(function(){
        socket.emit("add-to-cart-clicked", dat);
         
     });
+    */
   
     
-    if(btn) {
+    
       $("#cartAndTb").width(btn+377);  
         console.log(btn);
        
-    } else {
-        $("#cartAndTb").width(377+377);
-        
-        
-    }
+   
     /*
     
     if($(".satcb_btn button").length>0) {
@@ -146,8 +144,22 @@ $(document).ready(function(){
                     }
                 } else {
                     //socket.io.engine.id= position;
-                    socket.emit('store-userid', position);
+                    var ind= position.indexOf("sessionid");
+                    userId= position.substring(0, ind);
+                    var dat= {
+                        userId: userId,
+                        from: position.substring(ind+9);
+                    };
+                    console.log(JSON.stringify(dat));
+                    
+                    socket.emit('store-userid', dat);
                     console.log("socket id stored in cookie at savy "+position);
+                    
+                    
+                    
+                    
+                    
+                    
                 }
                 
                
@@ -155,6 +167,55 @@ $(document).ready(function(){
             
            
         }, false);
+    
+    
+    
+        $("input[type='submit']").click(function(){
+            var clickData= {
+                ogUrl: url,
+                userId: userId || socket.io.engine.id,
+                element: this
+            };
+            
+            console.log(JSON.stringify(clickData);)
+
+            socket.emit('click', clickData);
+        });
+
+        $("input[type='button']").click(function(){
+            var clickData= {
+                ogUrl: url,
+                userId: userId || socket.io.engine.id,
+                element: this
+            };
+            console.log(JSON.stringify(clickData);
+
+            socket.emit('click', clickData);
+        });
+
+        $("button").click(function(){
+            var clickData= {
+                ogUrl: url,
+                userId: userId || socket.io.engine.id,
+                element: this
+            };
+            console.log(JSON.stringify(clickData);
+
+            socket.emit('click', clickData);
+        });
+
+         $("a").click(function(){
+            var clickData= {
+                ogUrl: url,
+                userId: userId || socket.io.engine.id,
+                element: this
+            };
+
+             console.log(JSON.stringify(clickData);
+            socket.emit('click', clickData);
+        });
+    
+    
    
     
     

@@ -107,7 +107,7 @@ function main() {
                       var no_widg_script= $("<script>", {
                           type: "text/javascript",
                           async: true,
-                          src: "https://cdn.rawgit.com/dish615/devAbTest9/master/no-widg.js"
+                          src: "https://cdn.rawgit.com/dish615/devAbTest10/master/no-widg.js"
                       });
 
                       no_widg_script.appendTo("head");
@@ -120,7 +120,7 @@ function main() {
                     var css_link = $("<link>", { 
                         rel: "stylesheet", 
                         type: "text/css", 
-                        href: "https://cdn.rawgit.com/dish615/devAbTest9/master/style.css" 
+                        href: "https://cdn.rawgit.com/dish615/devAbTest10/master/style.css" 
 
                     });
 
@@ -139,7 +139,7 @@ function main() {
                    var widg_script = $("<script>", {
                        type: "text/javascript",
                         async: true,
-                        src: "https://cdn.rawgit.com/dish615/devAbTest9/master/check.js"
+                        src: "https://cdn.rawgit.com/dish615/devAbTest10/master/check.js"
                     });
 
                     widg_script.appendTo("head");
@@ -147,7 +147,7 @@ function main() {
 
 
 
-                    var jsonp_url= "https://cdn.rawgit.com/dish615/devAbTest9/master/index.html";
+                    var jsonp_url= "https://cdn.rawgit.com/dish615/devAbTest10/master/index.html";
                     $.get(jsonp_url, function(data){
                         console.log(data);
                         console.log(typeof data);

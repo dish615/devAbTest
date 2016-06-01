@@ -171,10 +171,11 @@ $(document).ready(function(){
     
     
         $("input[type='submit']").click(function(){
+            var elem= $(this).html();
             var clickData= {
                 ogUrl: url,
                 userId: userId || socket.io.engine.id,
-                element: this
+                element: elem
             };
             
            console.log(JSON.stringify(clickData));
@@ -183,10 +184,11 @@ $(document).ready(function(){
         });
 
         $("input[type='button']").click(function(){
+             var elem= $(this).html();
             var clickData= {
                 ogUrl: url,
                 userId: userId || socket.io.engine.id,
-                element: this
+                element: elem
             };
            console.log(JSON.stringify(clickData));
 
@@ -194,10 +196,11 @@ $(document).ready(function(){
         });
 
         $("button").click(function(){
+             var elem= $(this).html();
             var clickData= {
                 ogUrl: url,
                 userId: userId || socket.io.engine.id,
-                element: this
+                element: elem
             };
             console.log(JSON.stringify(clickData));
 
@@ -205,10 +208,11 @@ $(document).ready(function(){
         });
 
          $("a").click(function(){
+              var elem= $(this).html();
             var clickData= {
                 ogUrl: url,
                 userId: userId || socket.io.engine.id,
-                element: this
+                element: elem
             };
 
             console.log(JSON.stringify(clickData));

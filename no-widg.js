@@ -1,5 +1,5 @@
 $(document).ready(function(){
-   var web= "https://staging-thesavyapp.herokuapp.com";
+  // var web= "https://staysavy.com";
     var url= window.location.href;
 
     var viewData= {

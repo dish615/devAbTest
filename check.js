@@ -1,6 +1,6 @@
 $(document).ready(function(){
     //dont think this is working...
-    var web= "https://staysavy.com";
+    var web= "https://staging-thesavyapp.herokuapp.com";
     var userId;
     var url= window.location.href;
     //console.log(socket);
